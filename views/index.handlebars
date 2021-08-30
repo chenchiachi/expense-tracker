@@ -7,7 +7,7 @@
           <i class="fs-2 {{this.icon}}" style="color:lightblue"></i>
         </div>
         <div class="col-6">
-          <div class="fs-4">
+          <div class="fs-5">
             {{this.name}}
           </div>
           <div class="date">
@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="col-2 my-auto">
-          {{this.amount}}
+          {{this.amount}} 元
         </div>
         <div class="col-3 my-auto">
         <button class="btn btn-light" type="submit">修改</button>
@@ -26,3 +26,7 @@
     {{/each}}
   </ul>
 </div>
+<div class="d-flex justify-content-center m-5">
+  <a class="btn btn-dark px-5" style="background-color: #e3885b;" href="/records/new">新增支出</a>
+</div>
+  
