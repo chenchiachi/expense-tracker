@@ -18,8 +18,10 @@
           {{this.amount}} 元
         </div>
         <div class="col-3 my-auto">
-        <a class="btn btn-light" href="./records/{{ this._id }}/edit">修改</a>
-        <a class="btn btn-light">刪除</a>
+          <a class="btn btn-light" href="/records/{{this._id}}/edit">修改</a>
+          <form action="/records/{{this._id}}?_method=DELETE" method="POST" style="display: inline;" onsubmit="return confirm('是否確定刪除 {{this.name}} ?');">
+            <button class="btn btn-light" type="submit">刪除</button>
+          </form>
         </div>
       </div>
     </li>
@@ -29,4 +31,3 @@
 <div class="d-flex justify-content-center m-5">
   <a class="btn btn-dark px-5" style="background-color: #e3885b;" href="/records/new">新增支出</a>
 </div>
-  
