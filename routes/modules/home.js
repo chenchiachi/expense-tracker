@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
   const filteredCategory = req.query.category || ''
   let filteredRecord = {}
   if (filteredCategory) {
-    filteredRecord = { $or: [{ 'category': { '$regex': filteredCategory, '$options': 'i' }}]}
+    filteredRecord = { 'category': { '$regex': filteredCategory, '$options': 'i' } }
   }
 
   Record.find(filteredRecord)
