@@ -1,32 +1,53 @@
-<div class="d-flex justify-content-center">
-  <ul class="list-group" style="width:50vw">
-    {{#each records}}
-    <li class="list-group-item" style="color:dimgray">
-      <div class="row">
-        <div class="col-1 my-auto" >
-          <i class="fs-2 {{this.icon}}" style="color:lightblue"></i>
-        </div>
-        <div class="col-6">
-          <div class="fs-5">
-            {{this.name}}
-          </div>
-          <div class="date">
-            {{this.date}}
-          </div>
-        </div>
-        <div class="col-2 my-auto">
-          {{this.amount}} 元
-        </div>
-        <div class="col-3 my-auto">
-          <a class="btn btn-light" href="/records/{{this._id}}/edit">修改</a>
-          <form action="/records/{{this._id}}?_method=DELETE" method="POST" style="display: inline;" onsubmit="return confirm('是否確定刪除 {{this.name}} ?');">
-            <button class="btn btn-light" type="submit">刪除</button>
-          </form>
-        </div>
+<div class="container">
+  <div class="col-lg-8 mx-auto">
+    <div class="row my-3">
+      <div class="col-3">
+        <form action="/" method="GET" onchange="submit();">
+          <select name="category" class="form-select rounded-0 " id="category" required>
+            <option value="" {{#if (isEqual filteredCategory "" )}} selected {{/if}}>總支出</option>
+            <option value="家居物業" {{#if (isEqual filteredCategory "家居物業" )}} selected {{/if}}>家居物業</option>
+            <option value="交通出行" {{#if (isEqual filteredCategory "交通出行" )}} selected {{/if}}>交通出行</option>
+            <option value="休閒娛樂" {{#if (isEqual filteredCategory "休閒娛樂" )}} selected {{/if}}>休閒娛樂</option>
+            <option value="餐飲食品" {{#if (isEqual filteredCategory "餐飲食品" )}} selected {{/if}}>餐飲食品</option>
+            <option value="其他" {{#if (isEqual filteredCategory "其他" )}} selected {{/if}}>其他</option>
+          </select>
+      
+        </form>
       </div>
-    </li>
-    {{/each}}
-  </ul>
+      <label for="totalAmount" class="col-3 text-end">總金額：</label>
+      <div class="col-5" style="font-size: 50px;color:#e3885b">{{totalAmount}}
+      </div>
+    </div>
+    <ul class="list-group">
+      {{#each records}}
+      <li class="list-group-item" style="color:dimgray">
+        <div class="row">
+          <div class="col-2 my-auto text-center">
+            <i class="fs-2 {{this.icon}}" style="color:lightblue"></i>
+          </div>
+          <div class="col-4">
+            <div class="fs-5">
+              {{this.name}}
+            </div>
+            <div class="date">
+              {{this.date}}
+            </div>
+          </div>
+          <div class="col-2 my-auto text-end">
+            {{this.amount}} 元
+          </div>
+          <div class="col-4 my-auto text-center">
+            <a class="btn btn-light" href="/records/{{this._id}}/edit">修改</a>
+            <form action="/records/{{this._id}}?_method=DELETE" method="POST" style="display: inline;"
+              onsubmit="return confirm('是否確定刪除 {{this.name}} ?');">
+              <button class="btn btn-light" type="submit">刪除</button>
+            </form>
+          </div>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
 </div>
 <div class="d-flex justify-content-center m-5">
   <a class="btn btn-dark px-5" style="background-color: #e3885b;" href="/records/new">新增支出</a>
