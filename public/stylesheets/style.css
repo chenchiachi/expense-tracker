@@ -1,22 +1,33 @@
 .container {
   width: 85%;
 }
-.login-card {
-  color:dimgrey;
-  -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
-  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
-}
 
 .btn-major {
   background-color: #e3885b;
   color: white;
 }
 
-.login-card a {
+.login-card , .register-card{
+  color:dimgrey;
+  -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+}
+
+.login-card label,.login-card input, .register-card label, .register-card input  {
+margin: 0.2rem 0;
+}
+
+.login-card .btn, .register-card .btn {
+margin: 1rem 0;
+}
+
+.login-card a, .register-card a {
   color: #e3885b;
   text-decoration:none
 }
+
+
 
 .form-control:focus {
   box-shadow: none;
