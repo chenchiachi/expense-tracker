@@ -12,6 +12,7 @@ const CATEGORY = {
 }
 
 router.get('/', (req, res) => {
+  const userId = req.user._id
   let totalAmount = 0
   const filteredCategory = req.query.category || ''
   let filteredRecord = {}
@@ -19,7 +20,7 @@ router.get('/', (req, res) => {
     filteredRecord = { 'category': { '$regex': filteredCategory, '$options': 'i' } }
   }
 
-  Record.find(filteredRecord)
+  Record.find({ userId, ...filteredRecord })
     .lean()
     .then(records => {
       records.forEach(record => {
