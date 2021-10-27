@@ -16,7 +16,6 @@ router.post('/', (req, res) => {
 
 router.get('/:id/edit', (req, res) => {
   const id = req.params.id
-  const categorySelected = ''
   return Record.findById(id)
     .lean()
     .then(record => {
