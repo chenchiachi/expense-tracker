@@ -1,6 +1,10 @@
 # 家庭記帳本
 
 ## 基本功能
+- 使用者可以透過Email註冊帳號
+
+- 使用者可以透過Facebook登入
+
 - 在首頁一次瀏覽所有支出的清單
 
 - 在首頁看到所有支出清單的總金額
@@ -21,12 +25,39 @@ https://github.com/chenchiachi/expense-tracker.git
 ```
 - cd 至專案資料夾
 - 安裝 npm 套件
+```
+npm install
+```
+- 載入種子資料
+```
+npm run seed
+```
 - 使用 npm 開啟程式
+```
+npm run dev
+```
 
 ## 版本
-- npm: 6.4.1
+- bcryptjs: 2.4.3
+- body-parser: 1.19.0
+- Bootstrap: 4.2.1
+- connect-flash: 0.1.1
+- dotenv: 10.0.0
 - express: 4.17.1
 - express-handlebars: 5.3.3
-- mongoose: 6.0.2
+- express-session: 1.17.2
 - method-override: 3.0.0
-- dayjs: 1.10.6
+- mongoose: 5.13.7
+- passport: 0.5.0
+- passport-facebook: 3.0.0
+- passport-local: 1.0.0
+
+## 種子資料
+```
+name: 廣志
+password: 123456
+```
+```
+name: 小新
+password: 123456
+```
