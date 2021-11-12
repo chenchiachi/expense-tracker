@@ -21,8 +21,9 @@ app.engine('handlebars', exphbs({
     'isEqual': function (a, b) {
       return a === b
     },
-    'categoryHelper': function (categoryArray, selected = '') {
+    'categoryHelper': function (categoryArray = [], selected = '') {
       let html = ''
+      categoryArray.push(categoryArray.splice(categoryArray.findIndex(obj => obj.name === '其他'), 1)[0])
       for (const category of categoryArray) {
         if (category._id.toString() === selected) {
           html += `<option value="${category._id}" selected> ${category.name} </option>`

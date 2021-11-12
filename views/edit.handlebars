@@ -1,35 +1,35 @@
 <form action="/records/{{ record._id }}?_method=PUT" method="POST">
   <div class="container">
     <div class="form-group row" style="color:dimgray;">
-      <div class="col-12 col-md-6 mx-auto">
+      <div class="col-8 mx-auto">
         <div class="row mb-3">
-          <p class="col-sm-4 col-form-label text-center" style="font-size: x-small;height: 50px; line-height: 50px;">
+          <p class="col-form-label text-center" style="font-size: x-small;height: 50px; line-height: 50px;">
             *必填欄位</p>
-          <p class="col-sm-8 col-form-label text-center" style="height: 50px; line-height: 50px;">請修改你的支出</p>
+          <p class="col-10 col-form-label text-center" style="height: 50px; line-height: 50px;">請修改你的支出</p>
         </div>
         <div class="row mb-4">
-          <label for="name" class="col-sm-4 col-form-label text-center">名稱*：</label>
-          <div class="col-sm-8">
+          <label for="name" class="col-form-label text-center">名稱*：</label>
+          <div class="col-10">
             <input name="name" type="text" class="form-control rounded-0" id="name" value="{{ record.name }}" required>
           </div>
         </div>
         <div class="row mb-4">
-          <label for="date" class="col-sm-4 col-form-label text-center">日期*：</label>
-          <div class="col-sm-8">
+          <label for="date" class="col-form-label text-center">日期*：</label>
+          <div class="col-10">
             <input name="date" type="date" class="form-control rounded-0" id="date" value="{{ record.date }}" required>
           </div>
         </div>
         <div class="row mb-4">
-          <label for="categoryId" class="col-sm-4 col-form-label text-center">類別*：</label>
-          <div class="col-sm-8">
+          <label for="categoryId" class="col-form-label text-center">類別*：</label>
+          <div class="col-10">
             <select class="form-control rounded-0" name="categoryId" class="form-select rounded-0 " id="categoryId" required>
               {{{ categoryHelper category record.categoryId }}}
             </select>
           </div>
         </div>
         <div class="row mb-4">
-          <label for="amount" class="col-sm-4 col-form-label text-center">金額*：</label>
-          <div class="col-sm-8">
+          <label for="amount" class="col-form-label text-center">金額*：</label>
+          <div class="col-10">
             <input name="amount" type="number" min="0" class="form-control rounded-0 " id="amount"
               value="{{ record.amount }}" required>
           </div>

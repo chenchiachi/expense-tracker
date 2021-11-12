@@ -24,11 +24,13 @@
   "userSeeds": [
     {
       "name": "廣志",
-      "password": "123456",
+      "email": "user1@example.com",
+      "password": "12345678",
       "recordListIndex": [0, 1, 2, 4]
     },
     {
       "name": "小新",
+      "email": "user2@example.com",
       "password": "12345678",
       "recordListIndex": [3]
     }

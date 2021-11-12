@@ -16,6 +16,7 @@ db.once('open', () => {
       .then(salt => bcrypt.hash(seedUser.password, salt))
       .then(hash => User.create({
         name: seedUser.name,
+        email: seedUser.email,
         password: hash,
       }))
       .then(user => {
@@ -23,14 +24,11 @@ db.once('open', () => {
         return Promise.all(seedUser.recordListIndex.map(i => {
           return Category.findOne({ name: recordSeeder[i].category })
             .then(category => {
-              console.log('recordSeeder', recordSeeder);
               const categoryId = category._id
               recordSeeder[i].categoryId = categoryId
               recordSeeder[i].userId = userId
-
               return recordSeeder[i]
             }).then(recordData => {
-              console.log('recordData', recordData);
               return Record.create(recordData)
             })
         })

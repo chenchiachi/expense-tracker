@@ -10,17 +10,16 @@ router.get('/login', (req, res) => {
 
 
 router.post('/login', function (req, res, next) {
-  const { name, password } = req.body
-  if (!name || !password) {
-    req.flash('warning_msg', '請輸入使用者姓名和密碼。')
-    return res.redirect('/users/login')
+  const { email, password } = req.body
+  if (!email || !password) {
+    return res.render('login', { email, warning_msg: '請輸入使用者姓名和密碼。' })
+
   }
   passport.authenticate('local', function (err, user, info) {
     if (err) { return next(err); }
-    if (!user) { 
-      req.flash('warning_msg', info.message)
-      return res.redirect('/users/login')
-     }
+    if (!user) {
+      return res.render('login', { email, warning_msg: info.message })
+    }
     req.logIn(user, function (err) {
       if (err) { return next(err) }
       return res.redirect('/')
@@ -33,44 +32,48 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-  const { name, password, confirmPassword } = req.body
+  const { name, email, password, confirmPassword } = req.body
   const errors = []
-  if (!name || !password || !confirmPassword) {
-    errors.push({message: '所有欄位皆是必填。'})
+  if (!name || !email || !password || !confirmPassword) {
+    errors.push({ message: '所有欄位皆是必填。' })
   }
   if (password !== confirmPassword) {
-    errors.push({ message: '密碼與確認密碼不符。'})
+    errors.push({ message: '密碼與確認密碼不符。' })
   }
   if (errors.length) {
     return res.render('register', {
       errors,
       name,
+      email,
       password,
       confirmPassword
     })
   }
-  User.findOne({ name }).then(user => {
+  User.findOne({ email }).then(user => {
     if (user) {
       errors.push({ message: '此使用者已註冊。' })
-      res.render('register', {
+      return res.render('register', {
+        errors,
         name,
+        email,
         password,
         confirmPassword
       })
-    } 
+    }
     return bcrypt
-      .genSalt(10) 
-      .then(salt => bcrypt.hash(password, salt)) 
+      .genSalt(10)
+      .then(salt => bcrypt.hash(password, salt))
       .then(hash => User.create({
         name,
-        password: hash 
+        email,
+        password: hash
       }))
       .then(() => res.redirect('/'))
       .catch(err => console.log(err))
   })
 })
 
-router.get('/logout', (req,res) => {
+router.get('/logout', (req, res) => {
   req.logout()
   req.flash('success_msg', '已登出。')
   res.redirect('/users/login')

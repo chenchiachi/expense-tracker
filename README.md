@@ -54,10 +54,10 @@ npm run dev
 
 ## 種子資料
 ```
-name: 廣志
-password: 123456
+email: user1@example.com
+password: 12345678
 ```
 ```
-name: 小新
-password: 123456
+email: user2@example.com
+password: 12345678
 ```
