@@ -2,13 +2,9 @@
   <div class="row my-3">
     <div class="col-3">
       <form action="/" method="GET" onchange="submit();">
-        <select name="category" class="form-select rounded-0 " id="category" required>
+        <select name="categoryId" class="form-select rounded-0 " id="categoryId" required>
           <option value="" {{#if (isEqual filteredCategory "" )}} selected {{/if}}>總支出</option>
-          <option value="家居物業" {{#if (isEqual filteredCategory "家居物業" )}} selected {{/if}}>家居物業</option>
-          <option value="交通出行" {{#if (isEqual filteredCategory "交通出行" )}} selected {{/if}}>交通出行</option>
-          <option value="休閒娛樂" {{#if (isEqual filteredCategory "休閒娛樂" )}} selected {{/if}}>休閒娛樂</option>
-          <option value="餐飲食品" {{#if (isEqual filteredCategory "餐飲食品" )}} selected {{/if}}>餐飲食品</option>
-          <option value="其他" {{#if (isEqual filteredCategory "其他" )}} selected {{/if}}>其他</option>
+          {{{ categoryHelper category filteredCategory }}}
         </select>
       </form>
     </div>
@@ -21,7 +17,7 @@
     <li class="list-group-item" style="color:dimgray">
       <div class="row">
         <div class="col-2 my-auto text-center">
-          <i class="fs-2 {{this.icon}}" style="color:lightblue"></i>
+          <i class="{{this.icon}} fa-2x" style="color:lightblue"></i>
         </div>
         <div class="col-4">
           <div class="fs-5">

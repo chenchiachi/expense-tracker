@@ -1,36 +1,32 @@
 const express = require('express')
 const dayjs = require('dayjs')
 const router = express.Router()
-
+const Category = require('../../models/category')
 const Record = require('../../models/record')
-const CATEGORY = {
-  家居物業: "fas fa-home",
-  交通出行: "fas fa-shuttle-van",
-  休閒娛樂: "fas fa-grin-beam",
-  餐飲食品: "fas fa-utensils",
-  其他: "fas fa-pen"
-}
 
 router.get('/', (req, res) => {
   const userId = req.user._id
   let totalAmount = 0
-  const filteredCategory = req.query.category || ''
-  let filteredRecord = {}
-  if (filteredCategory) {
-    filteredRecord = { 'category': { '$regex': filteredCategory, '$options': 'i' } }
-  }
+  const filteredCategory = req.query.categoryId || ''
+  Category.find().then((category) => {
+    let filteredRecord = {}
+    if (filteredCategory) {
+      filteredRecord = { 'categoryId': filteredCategory }
+    }
 
-  Record.find({ userId, ...filteredRecord })
-    .lean()
-    .then(records => {
-      records.forEach(record => {
-        record.icon = CATEGORY[record.category]
-        record.date = dayjs(record.date).format('YYYY-MM-DD')
-        totalAmount += record.amount
+    Record.find({ userId, ...filteredRecord })
+      .lean()
+      .then(records => {
+        records.forEach(record => {
+          const recordCategoryIndex = category.findIndex(obj => obj._id.toString() === record.categoryId.toString())
+          record.icon = category[recordCategoryIndex].icon || ''
+          record.date = dayjs(record.date).format('YYYY-MM-DD')
+          totalAmount += record.amount
+        })
+        res.render('index', { records, category, totalAmount, filteredCategory })
       })
-      res.render('index', { records, totalAmount, filteredCategory })
-    })
-    .catch(error => console.error(error))
+      .catch(error => console.error(error))
+  })
 })
 
 module.exports = router

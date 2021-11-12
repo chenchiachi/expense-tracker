@@ -20,22 +20,18 @@
           </div>
         </div>
         <div class="row mb-4">
-          <label for="category" class="col-sm-4 col-form-label text-center">類別*：</label>
+          <label for="categoryId" class="col-sm-4 col-form-label text-center">類別*：</label>
           <div class="col-sm-8">
-            <select name="category" class="form-select rounded-0 " id="category" required>
-              <option value="家居物業" {{#if (isEqual record.category "家居物業")}} selected {{/if}}>家居物業</option>
-              <option value="交通出行" {{#if (isEqual record.category "交通出行")}} selected {{/if}}>交通出行</option>
-              <option value="休閒娛樂" {{#if (isEqual record.category "休閒娛樂")}} selected {{/if}}>休閒娛樂</option>
-              <option value="餐飲食品" {{#if (isEqual record.category "餐飲食品")}} selected {{/if}}>餐飲食品</option>
-              <option value="其他" {{#if (isEqual record.category "其他")}} selected {{/if}}>其他</option>
+            <select class="form-control rounded-0" name="categoryId" class="form-select rounded-0 " id="categoryId" required>
+              {{{ categoryHelper category record.categoryId }}}
             </select>
           </div>
         </div>
         <div class="row mb-4">
           <label for="amount" class="col-sm-4 col-form-label text-center">金額*：</label>
           <div class="col-sm-8">
-            <input name="amount" type="number" min="0" class="form-control rounded-0 " id="amount" value="{{ record.amount }}"
-              required>
+            <input name="amount" type="number" min="0" class="form-control rounded-0 " id="amount"
+              value="{{ record.amount }}" required>
           </div>
         </div>
         <div class="text-center mt-5">

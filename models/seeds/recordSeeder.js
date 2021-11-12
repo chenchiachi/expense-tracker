@@ -5,71 +5,36 @@ if (process.env.NODE_ENV !== 'production') {
 const Record = require('../record')
 const db = require('../../config/mongoose')
 const User = require('../user')
-const SEED_USER = [
-  {
-    name: '廣志',
-    password: '123456',
-    recordListIndex: [0, 1, 2, 4]
-  },
-  {
-    name: '小新',
-    password: '123456',
-    recordListIndex: [3]
-  }
-]
-
-const recordList = [{
-  id: 1,
-  name: '午餐',
-  date: new Date('2019-04-23'),
-  amount: 60,
-  category: '餐飲食品'
-},
-{
-  id: 2,
-  name: '晚餐',
-  date: new Date('2019-04-23'),
-  amount: 60,
-  category: '餐飲食品'
-},
-{
-  id: 3,
-  name: '捷運',
-  date: new Date('2019-04-23'),
-  amount: 120,
-  category: '交通出行'
-},
-{
-  id: 4,
-  name: '電影：驚奇隊長',
-  date: new Date('2019-04-23'),
-  amount: 220,
-  category: '休閒娛樂'
-},
-{
-  id: 5,
-  name: '租金',
-  date: new Date('2015-04-01'),
-  amount: 25000,
-  category: '家居物業'
-}]
+const Category = require('../category')
+const userSeeder = require('./seeds.json').userSeeds
+const recordSeeder = require('./seeds.json').recordSeeds
 
 db.once('open', () => {
-  Promise.all(Array.from(SEED_USER, seedUser => {
+  Promise.all(Array.from(userSeeder, seedUser => {
     return bcrypt
-    .genSalt(10)
-    .then(salt => bcrypt.hash(seedUser.password, salt))
-    .then(hash => User.create({
-      name: seedUser.name,
-      password: hash,
-    }))
-    .then(user => {
-      const userId = user._id
-        const recordData = seedUser.recordListIndex.map(i => {
-          recordList[i].userId = userId
-          return recordList[i]
+      .genSalt(10)
+      .then(salt => bcrypt.hash(seedUser.password, salt))
+      .then(hash => User.create({
+        name: seedUser.name,
+        password: hash,
+      }))
+      .then(user => {
+        const userId = user._id
+        return Promise.all(seedUser.recordListIndex.map(i => {
+          return Category.findOne({ name: recordSeeder[i].category })
+            .then(category => {
+              console.log('recordSeeder', recordSeeder);
+              const categoryId = category._id
+              recordSeeder[i].categoryId = categoryId
+              recordSeeder[i].userId = userId
+
+              return recordSeeder[i]
+            }).then(recordData => {
+              console.log('recordData', recordData);
+              return Record.create(recordData)
+            })
         })
-        return Record.create(recordData)
+        )
       })
   }))
     .then(() => {
@@ -77,19 +42,3 @@ db.once('open', () => {
       process.exit()
     })
 })
-
-
-
-// db.once('open', () => {
-
-//   recordList.forEach(record => {
-//     Record.create({
-//       id: record.id,
-//       name: record.name,
-//       date: record.date,
-//       amount: record.amount,
-//       category: record.category
-//   })
-//   })
-//   console.log('Done')
-// })

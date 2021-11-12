@@ -15,11 +15,24 @@ const routes = require('./routes')
 const app = express()
 const PORT = process.env.PORT
 
-app.engine('handlebars', exphbs({ 
+app.engine('handlebars', exphbs({
   defaultLayout: 'main',
-  helpers: {'isEqual': function(a, b) {
-    return a === b
-  }}
+  helpers: {
+    'isEqual': function (a, b) {
+      return a === b
+    },
+    'categoryHelper': function (categoryArray, selected = '') {
+      let html = ''
+      for (const category of categoryArray) {
+        if (category._id.toString() === selected) {
+          html += `<option value="${category._id}" selected> ${category.name} </option>`
+        } else {
+          html += `<option value="${category._id}" > ${category.name} </option>`
+        }
+      }
+      return html
+    }
+  }
 }))
 app.set('view engine', 'handlebars')
 
@@ -39,7 +52,7 @@ app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
   res.locals.success_msg = req.flash('success_msg')
-  res.locals.warning_msg = req.flash('warning_msg')  
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 

@@ -1,0 +1,73 @@
+{
+  "categorySeeds": [
+    {
+      "name": "家居物業",
+      "icon": "fas fa-home"
+    },
+    {
+      "name": "交通出行",
+      "icon": "fas fa-shuttle-van"
+    },
+    {
+      "name": "休閒娛樂",
+      "icon": "fas fa-grin-beam"
+    },
+    {
+      "name": "餐飲食品",
+      "icon": "fas fa-utensils"
+    },
+    {
+      "name": "其他",
+      "icon": "fas fa-pen"
+    }
+  ],
+  "userSeeds": [
+    {
+      "name": "廣志",
+      "password": "123456",
+      "recordListIndex": [0, 1, 2, 4]
+    },
+    {
+      "name": "小新",
+      "password": "12345678",
+      "recordListIndex": [3]
+    }
+  ],
+  "recordSeeds": [
+    {
+      "id": 1,
+      "name": "午餐",
+      "date": "2021-11-01",
+      "amount": 60,
+      "category": "餐飲食品"
+    },
+    {
+      "id": 2,
+      "name": "晚餐",
+      "date": "2021-11-01",
+      "amount": 60,
+      "category": "餐飲食品"
+    },
+    {
+      "id": 3,
+      "name": "捷運",
+      "date": "2021-11-01",
+      "amount": 120,
+      "category": "交通出行"
+    },
+    {
+      "id": 4,
+      "name": "電影：驚奇隊長",
+      "date": "2021-11-02",
+      "amount": 220,
+      "category": "休閒娛樂"
+    },
+    {
+      "id": 5,
+      "name": "租金",
+      "date": "2021-11-02",
+      "amount": 25000,
+      "category": "家居物業"
+    }
+  ]
+}

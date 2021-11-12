@@ -1,7 +1,7 @@
 <form action="/records" method="POST">
   <div class="container">
     <div class="form-group row" style="color:dimgray;">
-      <div class="col-12 col-lg-6 mx-auto">
+      <div class="col-12 col-md-6 mx-auto">
         <div class="row mb-3">
           <p class="col-sm-4 col-form-label text-center" style="font-size: x-small;height: 50px; line-height: 50px;">
             *必填欄位</p>
@@ -20,14 +20,10 @@
           </div>
         </div>
         <div class="row mb-4">
-          <label for="category" class="col-sm-4 col-form-label">類別*：</label>
+          <label for="categoryId" class="col-sm-4 col-form-label">類別*：</label>
           <div class="col-sm-8">
-            <select name="category" class="form-select rounded-0 " id="category" required>
-              <option value="家居物業">家居物業</option>
-              <option value="交通出行">交通出行</option>
-              <option value="休閒娛樂">休閒娛樂</option>
-              <option value="餐飲食品">餐飲食品</option>
-              <option value="其他">其他</option>
+            <select class="form-control rounded-0" name="categoryId" class="form-select rounded-0 " id="categoryId" required>
+              {{{ categoryHelper category }}}
             </select>
           </div>
         </div>
@@ -42,7 +38,7 @@
 
           <button class="btn btn-major" type="submit">新增支出</button>
         </div>
-      
+
       </div>
     </div>
 </form>
